@@ -5,7 +5,7 @@ http_response_code(403);
 echo 'Direct access not allowed';
 exit;
 }
-#include '../system/myjson.php';
+include '../system/myjson.php';
 include 'securityconfig.php';
 ini_set('display_errors', 0);
 
@@ -32,8 +32,9 @@ return $data;
 }
 
 function canAccess($user,$object){
+$edit_object = "=" . $object . ";";	
 $filter = checkFilterMode($user);
-$access = checkProfile($user,$object);
+$access = checkProfile($user,$edit_object);
 global $allow_if_not_defined;
 if(($filter != "ignore")&&($filter != "blacklist")&&($filter != "whitelist")) {return $allow_if_not_defined;}
 else if(($filter == "whitelist") && ($access == 0)){	
